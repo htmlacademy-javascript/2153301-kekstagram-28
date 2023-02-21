@@ -5,7 +5,6 @@
    console.log('неправильно');
  }
 }
-string = 20
 
  checkLengthString(30)
 
