@@ -1,11 +1,12 @@
- function checkLengthString (string) {
- if (string <= 20) {
-   console.log('правильно');
- } else {
-   console.log('неправильно');
+ function checkLengthLine ( line ) {
+ if (line <= 20) {
+
+ } else{
+
  }
 }
-string = 20
 
- checkLengthString(30)
+ function isPalindrome( line ) {
+  let stringArray = [...line];
+ }
 
