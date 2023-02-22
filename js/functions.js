@@ -1,12 +1,19 @@
  function checkLengthLine ( line ) {
- if (line <= 20) {
-
- } else{
-
- }
+   return line <= 20;
 }
 
- function isPalindrome( line ) {
-  let stringArray = [...line];
+ function checkPalindrome ( str ) {
+   str = str.toUpperCase().replace(/\s/g, '');
+   return str === str.split('').reverse().join('');
  }
 
+function findAllNumber (str) {
+  return str.replace(/[^0-9]/g,'')
+}
+
+
+ console.log(findAllNumber('ECMAScript 2022'));
+
+ // console.log(checkPalindrome ('шалаш'));
+
+ // console.log(checkLengthLine(30));
