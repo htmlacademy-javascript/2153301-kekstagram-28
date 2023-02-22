@@ -8,11 +8,15 @@
  }
 
 function findAllNumber (str) {
-  return str.replace(/[^0-9]/g,'')
+  return str.replace(/[^0-9]/g,'');
 }
+// function generationAddress (iStr, time, addStr ) {
+//   let address =
+// }
 
 
- console.log(findAllNumber('ECMAScript 2022'));
+
+ //console.log(findAllNumber('ECMAScript 2022'));
 
  // console.log(checkPalindrome ('шалаш'));
 
