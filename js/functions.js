@@ -21,3 +21,5 @@ function findAllNumber (str) {
  // console.log(checkPalindrome ('шалаш'));
 
  // console.log(checkLengthLine(30));
+
+
