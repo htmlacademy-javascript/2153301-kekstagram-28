@@ -65,7 +65,6 @@ const createObject = () => (
   }
 );
 
-const similarObject = Array.from({ length: QUANTITY_PHOTOS }, createObject);
+const createObjects = () => Array.from({ length: QUANTITY_PHOTOS }, createObject);
 
-console.log(similarObject);
-
+export {createObjects};
