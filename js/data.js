@@ -1,4 +1,4 @@
-import {getRandomArrayElement} from './util.js';
+import { getRandomArrayElement } from './util.js';
 
 const ID = [];
 for (let i = 1; i <= 25; i++) {
@@ -67,4 +67,4 @@ const createObject = () => (
 
 const createObjects = () => Array.from({ length: QUANTITY_PHOTOS }, createObject);
 
-export {createObjects};
+export { createObjects };
