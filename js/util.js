@@ -1,18 +1,14 @@
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() *
+    (
+      upper - lower + 1
+    ) +
+    lower;
+  return Math.floor(result);
+};
+
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createObject = () => (
-  {
-    id: getRandomArrayElement(ID),
-    url: `photos/${getRandomArrayElement(URL)}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomArrayElement(LIKES),
-    avatar: `img/avatar-${getRandomArrayElement(AVATAR)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
-    messageId: getRandomArrayElement(MESSAGE_ID),
-    name: getRandomArrayElement(NAME)
-  }
-);
-
-const similarObject = Array.from({ length: QUANTITY_PHOTOS }, createObject);
-
-// console.log(similarObject);
+export {getRandomArrayElement};
