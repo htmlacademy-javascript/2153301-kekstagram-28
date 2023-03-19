@@ -4,14 +4,14 @@ const TEMPLATE_PICTURE = document.querySelector('#picture').content.querySelecto
 const CONTAINER = document.querySelector('.pictures');
 
 const CREATE_THUMBNAIL = ({ url, likes, comments, description }) => {
-  let thumbnailClone = TEMPLATE_PICTURE.cloneNode(true);
+  const THUMBNAIL_CLONE = TEMPLATE_PICTURE.cloneNode(true);
 
-  thumbnailClone.querySelector('.picture__img').src = url;
-  thumbnailClone.querySelector('.picture__img').alt = description;
-  thumbnailClone.querySelector('.picture__likes').textContent = likes;
-  thumbnailClone.querySelector('.picture__comments').textContent = comments.length;
+  THUMBNAIL_CLONE.querySelector('.picture__img').src = url;
+  THUMBNAIL_CLONE.querySelector('.picture__img').alt = description;
+  THUMBNAIL_CLONE.querySelector('.picture__likes').textContent = likes;
+  THUMBNAIL_CLONE.querySelector('.picture__comments').textContent = comments.length;
 
-  return thumbnailClone;
+  return THUMBNAIL_CLONE;
 };
 
 const RENDER_THUMBNAILS = (pictures) => {
