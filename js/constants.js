@@ -59,7 +59,7 @@ const createObject = () => (
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomArrayElement(LIKES),
     avatar: `img/avatar-${getRandomArrayElement(AVATAR)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
+    comments: getRandomArrayElement(COMMENTS),
     messageId: getRandomArrayElement(MESSAGE_ID),
     name: getRandomArrayElement(NAME)
   }

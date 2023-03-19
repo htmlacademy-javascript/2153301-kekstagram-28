@@ -1,5 +1,8 @@
 import './util.js';
 
-import {createObjects} from './data.js';
+import { createObjects } from './constants.js';
+import { RENDER_THUMBNAILS } from './drawing-thumbnails.js';
 
-// console.log(createObjects())
+RENDER_THUMBNAILS(createObjects());
+
+
