@@ -8,7 +8,7 @@ function checkPalindrome(str) {
 }
 
 let resultNumber = '';
-const EXTRACT_NUMBER = (string) => {
+const extractNumber = (string) => {
   for (let i = 0; i < string.length; i++) {
     if (!Number.isNaN(parseInt(string.at(i), 10))) {
       resultNumber += string.at(i);
