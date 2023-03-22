@@ -1,4 +1,5 @@
 import { getRandomArrayElement } from './util.js';
+import {generatePhotoId} from './util.js'
 
 const renderId = [];
 for (let i = 1; i <= 25; i++) {
@@ -54,7 +55,7 @@ const COUNT_COPY = 25;
 
 const createObject = () => (
   {
-    id: getRandomArrayElement(renderId),
+    id: generatePhotoId(),
     url: `photos/${getRandomArrayElement(renderUrl)}.jpg`,
     description: getRandomArrayElement(renderDescription),
     likes: getRandomArrayElement(renderLikes),
@@ -68,3 +69,5 @@ const createObject = () => (
 const createObjects = () => Array.from({ length: COUNT_COPY }, createObject);
 
 export { createObjects };
+
+
