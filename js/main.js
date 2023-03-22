@@ -4,9 +4,15 @@
 
 import { createObjects } from './constants.js';
 import { renderThumbnails } from './drawing-thumbnails.js';
-// import {logger} from 'browser-sync/dist/logger.js';
 
 renderThumbnails(createObjects());
+
+import {getPictures} from './constants.js';
+import {renderGallery} from './gallery.js';
+
+renderGallery(getPictures());
+
+
 
 
 
