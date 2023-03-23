@@ -12,28 +12,9 @@ const getRandomInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-// создание порядкового ID картинки
-const createIdGeneratorPicture = () => {
-  let lastGeneratedId = 0;
-  return () => {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const generatePhotoId = createIdGeneratorPicture();
+const isEnterKey = (evt) => evt.key === 'Enter';
 
-// создание порядкового ID комментария
-const createIdGeneratorComment = () => {
-  let lastGeneratedId = 0;
-  return () => {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
+export {getRandomArrayElement, isEscapeKey, isEnterKey};
 
-const generateCommentId = createIdGeneratorComment();
-
-export {generatePhotoId}
-export {getRandomArrayElement};
-export {generateCommentId};

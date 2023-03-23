@@ -1,5 +1,5 @@
 import { getRandomArrayElement } from './util.js';
-import {generatePhotoId, generateCommentId} from './util.js';
+import {generatePhotoId, generateCommentId} from './create-all-ID.js';
 
 const renderUrl = [];
 for (let i = 1; i <= 25; i++) {

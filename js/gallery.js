@@ -1,24 +1,30 @@
-import {renderThumbnails} from './create-thumbnails.js';
-
 
 
 const container = document.querySelector('.pictures');
+const bigPicture = document.querySelector('.big-picture')
 
-const renderGallery = (pictures) => {
-  container.addEventListener('click', (evt) => {
+// const renderGallery = (pictures) => {
+//   container.addEventListener('click', (evt) => {
+//
+//      const thumbnail = evt.target.closest('[data-thumbnail-id]');
+//      if (!thumbnail) {
+//        return;
+//      }
+//
+//      // const picture = pictures.find(
+//      //   (item) => item.id === +thumbnail.dataset.thumbnailId
+//      // );
+//      // showBigPicture(picture);
+//   })
+//
+//   renderThumbnails(pictures, container);
+// };
 
-     const thumbnail = evt.target.closest('[data-thumbnail-id]');
-     if (!thumbnail) {
-       return;
-     }
 
-     const picture = pictures.find(
-       (item) => item.id === +thumbnail.dataset.thumbnailId
-     );
-     showBigPicture(picture);
-  })
-
-  renderThumbnails(pictures, container);
-};
-
-console.log();
+container.addEventListener('click', (evt) => {
+  const thumbnail = evt.target.closest('[data-thumbnail-id]');
+  if (!thumbnail) {
+    return;
+  }
+    bigPicture.classList.remove('hidden')
+})
