@@ -1,17 +1,10 @@
 import { getRandomArrayElement } from './util.js';
-import {generatePhotoId} from './util.js';
-
-const renderId = [];
-for (let i = 1; i <= 25; i++) {
-  renderId.push(i);
-}
-
+import {generatePhotoId, generateCommentId} from './util.js';
 
 const renderUrl = [];
 for (let i = 1; i <= 25; i++) {
   renderUrl.push(i);
 }
-
 
 const renderDescription = [
   'Багровый закат',
@@ -30,7 +23,7 @@ for (let i = 1; i <= 6; i++) {
   renderAvatar.push(i);
 }
 
-const renderComments = [
+const renderMessages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -53,24 +46,28 @@ const renderName = [
 
 const COUNT_COPY = 25;
 
-const createObject = () => (
-  {
-    id: generatePhotoId(),
-    url: `photos/${getRandomArrayElement(renderUrl)}.jpg`,
-    description: getRandomArrayElement(renderDescription),
-    likes: getRandomArrayElement(renderLikes),
-    avatar: `img/avatar-${getRandomArrayElement(renderAvatar)}.svg`,
-    comments: getRandomArrayElement(renderComments),
-    messageId: getRandomArrayElement(renderMessageId),
-    name: getRandomArrayElement(renderName)
-  }
-);
+const COUNT_COMMENT = 3;
+
+const createObject = () => ({
+  id: generatePhotoId(),
+  url: `photos/${getRandomArrayElement(renderUrl)}.jpg`,
+  description: getRandomArrayElement(renderDescription),
+  likes: getRandomArrayElement(renderLikes),
+  comments: createComments(),
+});
+
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: `img/avatar-${getRandomArrayElement(renderAvatar)}.svg`,
+  message: getRandomArrayElement(renderMessages),
+  name: getRandomArrayElement(renderName),
+})
 
 const createObjects = () => Array.from({ length: COUNT_COPY }, createObject);
 
-
-
-
+const createComments = () => Array.from({ length: COUNT_COMMENT }, createComment);
 
 export { createObjects };
 
+// console.log(createObjects());
+// console.log(createComments());

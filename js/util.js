@@ -1,3 +1,4 @@
+// Рандомайзер
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -11,16 +12,28 @@ const getRandomInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createIdGenerator = () => {
+// создание порядкового ID картинки
+const createIdGeneratorPicture = () => {
   let lastGeneratedId = 0;
-
   return () => {
     lastGeneratedId += 1;
     return lastGeneratedId;
   };
 };
 
-const generatePhotoId = createIdGenerator();
+const generatePhotoId = createIdGeneratorPicture();
+
+// создание порядкового ID комментария
+const createIdGeneratorComment = () => {
+  let lastGeneratedId = 0;
+  return () => {
+    lastGeneratedId += 1;
+    return lastGeneratedId;
+  };
+};
+
+const generateCommentId = createIdGeneratorComment();
 
 export {generatePhotoId}
 export {getRandomArrayElement};
+export {generateCommentId};

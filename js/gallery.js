@@ -1,4 +1,4 @@
-import {renderThumbnails} from './drawing-thumbnails.js';
+import {renderThumbnails} from './create-thumbnails.js';
 
 
 
@@ -6,7 +6,7 @@ const container = document.querySelector('.pictures');
 
 const renderGallery = (pictures) => {
   container.addEventListener('click', (evt) => {
-    debugger
+
      const thumbnail = evt.target.closest('[data-thumbnail-id]');
      if (!thumbnail) {
        return;
@@ -20,3 +20,5 @@ const renderGallery = (pictures) => {
 
   renderThumbnails(pictures, container);
 };
+
+console.log();
