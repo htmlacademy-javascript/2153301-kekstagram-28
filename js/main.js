@@ -1,5 +1,5 @@
 import './gallery.js'
-
+import  './displayBigPicture.js'
 
 
 import { createObjects } from './constants.js';
