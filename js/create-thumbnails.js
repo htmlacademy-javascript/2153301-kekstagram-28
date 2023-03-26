@@ -1,4 +1,6 @@
 // шаблон
+// import { logger } from 'browser-sync/dist/logger.js';
+
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 
 // контейнер для фотографий
@@ -27,4 +29,5 @@ const renderThumbnails = (pictures) => {
 };
 
 export { renderThumbnails };
+
 
