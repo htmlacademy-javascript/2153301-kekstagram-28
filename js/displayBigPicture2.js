@@ -9,26 +9,24 @@ const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
-
 // функция отслеживающая нажатие ENTER
-export const addHandlers = (objects) => {
-  const links = document.querySelectorAll('.picture');
-  links.forEach((link) => {
-    link.addEventListener('keydown', (evt) => {
-      if (isEnterKey(evt)) {
-        showBigPicture(objects, link);
-      }
-    })
-    link.addEventListener('click', () => {
-      showBigPicture(objects, link);
-    })
-  })
+
+const closeBigPicture = () => {
+  bigPictureWrap.classList.add('hidden');
+  body.classList.remove('modal-open');
+  document.removeEventListener('keydown', handleEscapeKeydown);
+};
+
+const handleEscapeKeydown = (evt) => {
+  if(isEscapeKey(evt)) {
+    closeBigPicture();
+  }
 };
 
 const showBigPicture = (objects, link) => {
   const ad = objects.find((item) => {
-    return item.id === Number(link.dataset.thumbnailId)
-  })
+    return item.id === Number(link.dataset.thumbnailId);
+  });
   bigPictureWrap.classList.remove('hidden');
   bigPictureImg.src = ad.url;
   likesCount.textContent = ad.likes;
@@ -44,16 +42,14 @@ const showBigPicture = (objects, link) => {
     picture.alt = item.name;
     socialText.textContent = item.message;
 
-
     commentFragment.append(newComment);
-  })
+  });
   comments.textContent = '';
   comments.append(commentFragment);
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
   const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
   const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
-
 
   socialCaption.textContent = ad.description;
   socialCommentCount.classList.add('hidden');
@@ -63,20 +59,23 @@ const showBigPicture = (objects, link) => {
   document.addEventListener('keydown', handleEscapeKeydown);
 };
 
- const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
+// функция отслеживающая нажатие ENTER и клик на миниатюре
+export const addHandlers = (objects) => {
+  const links = document.querySelectorAll('.picture');
+  links.forEach((link) => {
+    link.addEventListener('keydown', (evt) => {
+      if (isEnterKey(evt)) {
+        showBigPicture(objects, link);
+      }
+    });
+    link.addEventListener('click', () => {
+      showBigPicture(objects, link);
+    });
+  });
+};
+
+const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
 
 bigPictureCancel.addEventListener('click', () => {
   closeBigPicture();
-})
-
-const handleEscapeKeydown = (evt) => {
-  if(isEscapeKey(evt)) {
-    closeBigPicture();
-  }
-}
-
-const closeBigPicture = () => {
-  bigPictureWrap.classList.add('hidden');
-  body.classList.remove('modal-open');
-  document.removeEventListener('keydown', handleEscapeKeydown);
-}
+});

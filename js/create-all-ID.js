@@ -21,5 +21,5 @@ const createIdGeneratorComment = () => {
 
 const generateCommentId = createIdGeneratorComment();
 
-export {generatePhotoId}
+export {generatePhotoId};
 export {generateCommentId};

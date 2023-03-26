@@ -45,8 +45,16 @@ const renderName = [
 ];
 
 const COUNT_COPY = 25;
-
 const COUNT_COMMENT = 3;
+
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: `img/avatar-${getRandomArrayElement(renderAvatar)}.svg`,
+  message: getRandomArrayElement(renderMessages),
+  name: getRandomArrayElement(renderName),
+});
+
+const createComments = () => Array.from({ length: COUNT_COMMENT }, createComment);
 
 const createObject = () => ({
   id: generatePhotoId(),
@@ -56,16 +64,7 @@ const createObject = () => ({
   comments: createComments(),
 });
 
-const createComment = () => ({
-  id: generateCommentId(),
-  avatar: `img/avatar-${getRandomArrayElement(renderAvatar)}.svg`,
-  message: getRandomArrayElement(renderMessages),
-  name: getRandomArrayElement(renderName),
-})
-
 const createObjects = () => Array.from({ length: COUNT_COPY }, createObject);
-
-const createComments = () => Array.from({ length: COUNT_COMMENT }, createComment);
 
 export { createObjects };
 
