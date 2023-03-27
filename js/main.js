@@ -1,8 +1,18 @@
-import './util.js';
+// import './gallery.js'
+// import  './displayBigPicture.js'
+
 
 import { createObjects } from './constants.js';
-import { RENDER_THUMBNAILS } from './drawing-thumbnails.js';
+import { renderThumbnails } from './create-thumbnails.js';
+import { addHandlers } from './displayBigPicture2.js';
 
-RENDER_THUMBNAILS(createObjects());
 
+const objects = createObjects();
+
+
+renderThumbnails(objects);
+
+// console.log(renderThumbnails);
+
+addHandlers(objects);
 

@@ -1,35 +1,29 @@
 import { getRandomArrayElement } from './util.js';
+import {generatePhotoId, generateCommentId} from './create-all-ID.js';
 
-const ID = [];
+const renderUrl = [];
 for (let i = 1; i <= 25; i++) {
-  ID.push(i);
+  renderUrl.push(i);
 }
 
-
-const URL = [];
-for (let i = 1; i <= 25; i++) {
-  URL.push(i);
-}
-
-
-const DESCRIPTION = [
+const renderDescription = [
   'Багровый закат',
   'Тайная вечеря',
   'Ленин и дети'
 ];
 
-const LIKES = [];
+const renderLikes = [];
 for (let i = 15; i <= 200; i++) {
-  LIKES.push(i);
+  renderLikes.push(i);
 }
 
 
-const AVATAR = [];
+const renderAvatar = [];
 for (let i = 1; i <= 6; i++) {
-  AVATAR.push(i);
+  renderAvatar.push(i);
 }
 
-const COMMENTS = [
+const renderMessages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -38,33 +32,42 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const MESSAGE_ID = [];
+const renderMessageId = [];
 for (let i = 1; i <= 999; i++) {
-  MESSAGE_ID.push(i);
+  renderMessageId.push(i);
 }
 
-const NAME = [
+const renderName = [
   'Артём',
   'Артур',
   'Альфонс',
   'Адольф'
 ];
 
-const QUANTITY_PHOTOS = 25;
+const COUNT_COPY = 25;
+const COUNT_COMMENT = 3;
 
-const createObject = () => (
-  {
-    id: getRandomArrayElement(ID),
-    url: `photos/${getRandomArrayElement(URL)}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomArrayElement(LIKES),
-    avatar: `img/avatar-${getRandomArrayElement(AVATAR)}.svg`,
-    comments: getRandomArrayElement(COMMENTS),
-    messageId: getRandomArrayElement(MESSAGE_ID),
-    name: getRandomArrayElement(NAME)
-  }
-);
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: `img/avatar-${getRandomArrayElement(renderAvatar)}.svg`,
+  message: getRandomArrayElement(renderMessages),
+  name: getRandomArrayElement(renderName),
+});
 
-const createObjects = () => Array.from({ length: QUANTITY_PHOTOS }, createObject);
+const createComments = () => Array.from({ length: COUNT_COMMENT }, createComment);
+
+const createObject = () => ({
+  id: generatePhotoId(),
+  url: `photos/${getRandomArrayElement(renderUrl)}.jpg`,
+  description: getRandomArrayElement(renderDescription),
+  likes: getRandomArrayElement(renderLikes),
+  comments: createComments(),
+});
+
+const createObjects = () => Array.from({ length: COUNT_COPY }, createObject);
 
 export { createObjects };
+
+// console.log(createObjects());
+// console.log(createComments());
+
