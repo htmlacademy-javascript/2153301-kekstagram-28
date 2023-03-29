@@ -21,20 +21,16 @@ const showPhotoEditing = () => {
 const closePhotoEditing = () => {
     imgOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
-    inputUploadFile.value = '';
+    inputUploadFile.reset();
     document.removeEventListener('keydown', handleEscapeKeydown);
-    uploadCancel.removeEventListener('click', () => {
-      closePhotoEditing();
-    })
+    uploadCancel.removeEventListener('click', closePhotoEditing)
   };
 
 export const handleUserForm = () => {
   inputUploadFile.addEventListener('change', () => {
     showPhotoEditing();
     document.addEventListener('keydown', handleEscapeKeydown);
-    uploadCancel.addEventListener('click', () => {
-      closePhotoEditing();
-    })
+    uploadCancel.addEventListener('click', closePhotoEditing)
   });
 };
 
