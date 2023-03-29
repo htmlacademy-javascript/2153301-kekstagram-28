@@ -6,6 +6,7 @@ const imgOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 // кнопка закрытия окна редактирования фотографии
 const uploadCancel = document.querySelector('#upload-cancel');
+
 // валидируемая форма
 const uploadForm = document.querySelector('.img-upload__form');
 
@@ -19,20 +20,27 @@ const pristine = new Pristine(uploadForm, {
 });
 
 function validateComment (value) {
-  return value <= 140;
+  return value.length <= 140;
 }
 
 function validateHashtags (value) {
-  return value = /^#[a-zа-яё0-9]{1,19}$/i;
+  if (value.length === 0) return true;
+  const splittedValue = value.split(' ');
+  // необходимо проверить каждый элемент массива на соответствие регулярному выражению, если хоть один из элементов не проходит проверку вернуть false
+  return /^#[a-zа-яё0-9]{1,19}$/i.test(value);
 }
 
 pristine.addValidator(uploadForm.querySelector('#text-description'), validateComment, 'Не более 140 символов');
-pristine.addValidator(uploadForm.querySelector('#text-hashtags'), validateHashtags, 'Хэштэг должен содержать только буквы и цифры и должен быть не менее двух и не более 20 знаков')
+pristine.addValidator(uploadForm.querySelector('#text-hashtags'), validateHashtags, 'Хэштэг должен начинаться с #,содержать буквы, цифры и должен быть не менее двух и не более 20 знаков');
 
 
 uploadForm.addEventListener('submit', function (evt)  {
-  validateComment = pristine.validate();
-  // evt.preventDefault();
+  evt.preventDefault()
+  if(pristine.validate()) {
+    console.log('valid');
+  } else{
+    console.log('invalid');
+  }
 });
 
 const handleEscapeKeydown = (evt) => {
