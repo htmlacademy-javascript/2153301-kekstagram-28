@@ -25,14 +25,13 @@ function validateComment (value) {
 
 function validateHashtags (value) {
   if (value.length === 0) return true;
-  const splittedValue = value.split(' ');
+  // const splittedValue = value.split(' ');
   // необходимо проверить каждый элемент массива на соответствие регулярному выражению, если хоть один из элементов не проходит проверку вернуть false
   return /^#[a-zа-яё0-9]{1,19}$/i.test(value);
 }
 
 pristine.addValidator(uploadForm.querySelector('#text-description'), validateComment, 'Не более 140 символов');
 pristine.addValidator(uploadForm.querySelector('#text-hashtags'), validateHashtags, 'Хэштэг должен начинаться с #,содержать буквы, цифры и должен быть не менее двух и не более 20 знаков');
-
 
 uploadForm.addEventListener('submit', function (evt)  {
   evt.preventDefault()
@@ -55,13 +54,14 @@ const showPhotoEditing = () => {
 };
 
 const closePhotoEditing = () => {
-    imgOverlay.classList.add('hidden');
-    body.classList.remove('modal-open');
-    inputUploadFile.reset();
-    pristine.reset();
-    document.removeEventListener('keydown', handleEscapeKeydown);
-    uploadCancel.removeEventListener('click', closePhotoEditing)
-  };
+  imgOverlay.classList.add('hidden');
+  body.classList.remove('modal-open');
+  inputUploadFile.reset();
+  pristine.reset();
+  document.removeEventListener('keydown', handleEscapeKeydown);
+  uploadCancel.removeEventListener('click', closePhotoEditing)
+
+};
 
 export const handleUserForm = () => {
   inputUploadFile.addEventListener('change', () => {
