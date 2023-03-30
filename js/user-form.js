@@ -23,6 +23,18 @@ function validateComment (value) {
   return value.length <= 140;
 }
 
+// const validateHashtags = (value) => {
+//   const valueFreeSpace = value.trimEnd();
+//
+//   if(valueFreeSpace.length === 0) {
+//     return true;
+//   } else {
+//     const splittedValue = valueFreeSpace.split(' ');
+//     return splittedValue.every((item) =>
+//       /^#[a-zа-яё0-9]{1,19}$/i.test(item));
+//   }
+// };
+
 const validateHashtags = (value) => {
   const valueFreeSpace = value.trimEnd();
 
@@ -30,16 +42,18 @@ const validateHashtags = (value) => {
     return true;
   } else {
     const splittedValue = valueFreeSpace.split(' ');
-    return splittedValue.every((item) =>
-      /^#[a-zа-яё0-9]{1,19}$/i.test(item));
+    if (splittedValue.length < 6) {
+      return splittedValue.every((item) =>
+        /^#[a-zа-яё0-9]{1,19}$/i.test(item));
+    }
   }
 };
 
 pristine.addValidator(uploadForm.querySelector('#text-description'), validateComment, 'Не более 140 символов');
-pristine.addValidator(uploadForm.querySelector('#text-hashtags'), validateHashtags, 'Хэштэг должен начинаться с #,содержать буквы, цифры и должен быть не менее двух и не более 20 знаков');
+pristine.addValidator(uploadForm.querySelector('#text-hashtags'), validateHashtags, 'Хэштэг должен начинаться с' +
+  ' #,содержать буквы, цифры и должен быть не менее двух и не более 20 знаков. Нельзя использовать более пяти хэш-тегов.');
 
 uploadForm.addEventListener('submit', function (evt)  {
-  // evt.preventDefault()
   if(!pristine.validate()) {
     evt.preventDefault();
   }
