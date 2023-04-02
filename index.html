@@ -35,6 +35,7 @@
           class="img-upload__form"
           id="upload-select-image"
           method="post"
+          action="https://28.javascript.pages.academy/kekstagram"
           enctype="multipart/form-data"
           autocomplete="off"
         >
@@ -167,10 +168,10 @@
               <!-- Добавление хэш-тегов и комментария к изображению -->
               <fieldset class="img-upload__text text">
                 <div class="img-upload__field-wrapper">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
+                  <input class="text__hashtags" id="text-hashtags" name="hashtags" placeholder="#ХэшТег">
                 </div>
                 <div class="img-upload__field-wrapper">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <textarea class="text__description" id="text-description" name="description" placeholder="Ваш комментарий..."></textarea>
                 </div>
               </fieldset>
 
@@ -305,6 +306,8 @@
   <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
 </template>
 
+<script src="vendor/pristine/pristine.min.js"></script>
+<script src="vendor/nouislider/nouislider.js"></script>
 <script src="js/main.js" type="module"></script>
 
 </body>
