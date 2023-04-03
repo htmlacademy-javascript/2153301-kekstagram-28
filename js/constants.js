@@ -68,6 +68,4 @@ const createObjects = () => Array.from({ length: COUNT_COPY }, createObject);
 
 export { createObjects };
 
-// console.log(createObjects());
-// console.log(createComments());
 
