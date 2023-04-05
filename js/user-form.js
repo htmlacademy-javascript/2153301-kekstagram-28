@@ -13,6 +13,7 @@ const uploadCancel = document.querySelector('#upload-cancel');
 // поля комментариев и хештегов
 const commentField = document.querySelector('#text-description');
 const hashtagsField = document.querySelector('#text-hashtags');
+const uploadForm = document.querySelector('.img-upload__form')
 
 
 const handleEscapeKeydown = (evt) => {
@@ -45,7 +46,7 @@ const closePhotoEditing = () => {
   hashtagsField.removeEventListener('keydown', removeListenerField);
 };
 
-export const handleUserForm = () => {
+const handleUserForm = () => {
   inputUploadFile.addEventListener('change', () => {
     showPhotoEditing();
     document.addEventListener('keydown', handleEscapeKeydown);
@@ -54,3 +55,24 @@ export const handleUserForm = () => {
     hashtagsField.addEventListener('keydown', removeListenerField) ;
   });
 };
+
+const setUserFormSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit',(evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
+
+      fetch(
+        'https://28.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ).then(() => onSuccess());
+    }
+  });
+}
+
+export {handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditing};
