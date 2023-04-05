@@ -1,9 +1,9 @@
-import { renderThumbnails } from './create-thumbnails.js';
+ import { renderThumbnails } from './create-thumbnails.js';
 import { addHandlers } from './displayBigPicture.js';
 import { handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditing} from './user-form.js';
 
 
-// setUserFormSubmit(closePhotoEditing());
+
 // renderThumbnails();
 // addHandlers();
 // handleUserForm();
@@ -15,7 +15,7 @@ fetch('https://28.javascript.pages.academy/kekstagram/data')
     handleUserForm(photos);
     addHandlers(photos);
   });
-
-
+//
+ setUserFormSubmit(closePhotoEditing);
 
 
