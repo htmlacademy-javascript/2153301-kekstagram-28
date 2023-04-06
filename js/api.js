@@ -1,32 +1,39 @@
-const BASE_URL = 'https'://28.javascript.pages.academy/kekstagram';
+import {renderThumbnails} from './create-thumbnails.js';
+import {handleUserForm} from './user-form.js';
+import {addHandlers} from './displayBigPicture.js';
+
+const BASE_URL = 'https://28.javascript.pages.academy/code-and-magick';
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
 };
-const Method = {
-  GET: 'GET',
-  POST: 'POST',
-};
-const ErrorText = {
-  GET_DATA: 'Загрузка не выполнена, перезагрузите страницу.',
-  SEND_DATA: 'Не удалось отправить форму, попробуйте ещё раз.',
-};
 
-const load = (route, errorText, method = Method.GET, body = null) =>
-  fetch(`${BASE_URL}${route}`, { method, body })
+
+const getData = (onSuccess) => fetch
+  ('https://28.javascript.pages.academy/kekstagram/data')
+    .then((response) => response.json())
+    .then((photos) => {
+      renderThumbnails(photos);
+      handleUserForm(photos);
+      addHandlers(photos);
+      onSuccess(photos);
+    });
+
+
+const sendData = (onSuccess, onFail, body) =>
+  fetch(
+    'https://28.javascript.pages.academy/kekstagram',
+    {
+      method: 'POST',
+      body,
+    })
     .then((response) => {
       if (!response.ok) {
         throw new Error();
       }
-      return response.json();
     })
     .catch(() => {
-      throw new Error(errorText)
+      throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
     });
 
-const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
-
-const sendData = (body) =>
-  load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
-
-export { getData, sendData};
+export { getData, sendData };

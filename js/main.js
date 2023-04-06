@@ -1,21 +1,16 @@
- import { renderThumbnails } from './create-thumbnails.js';
+import { renderThumbnails } from './create-thumbnails.js';
 import { addHandlers } from './displayBigPicture.js';
-import { handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditing} from './user-form.js';
+import { handleUserForm, setUserFormSubmit, closePhotoEditing} from './user-form.js';
+import { getData} from './api.js';
 
 
-
-// renderThumbnails();
-// addHandlers();
-// handleUserForm();
-
-fetch('https://28.javascript.pages.academy/kekstagram/data')
-  .then((response) => response.json())
+getData()
   .then((photos) => {
     renderThumbnails(photos);
     handleUserForm(photos);
     addHandlers(photos);
   });
-//
+
  setUserFormSubmit(closePhotoEditing);
 
 

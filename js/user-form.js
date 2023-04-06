@@ -1,7 +1,8 @@
 import { resetScale } from './slider-scale.js';
 import { resetEffects } from './slider-effect.js';
-import { isEscapeKey } from './util.js';
+import { isEscapeKey, showAlert } from './util.js';
 import { pristine } from './validation-input.js';
+import { sendData} from './api.js';
 
 const inputUploadFile = document.querySelector('#upload-file');
 // модальное окно редактирования фотографии
@@ -62,15 +63,11 @@ const setUserFormSubmit = (onSuccess) => {
 
     const isValid = pristine.validate();
     if (isValid) {
-      const formData = new FormData(evt.target);
-
-      fetch(
-        'https://28.javascript.pages.academy/kekstagram',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      ).then(() => onSuccess());
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .catch((err) => {
+          showAlert(err.message);
+      });
     }
   });
 }
