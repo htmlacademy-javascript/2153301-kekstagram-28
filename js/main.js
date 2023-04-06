@@ -3,6 +3,7 @@ import { addHandlers } from './displayBigPicture.js';
 import { handleUserForm, setUserFormSubmit, closePhotoEditing} from './user-form.js';
 import { getData} from './api.js';
 import {showAlert} from './util.js';
+import './modal-error-success.js';
 
 getData()
   .then((photos) => {
