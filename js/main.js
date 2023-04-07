@@ -17,4 +17,4 @@ getData()
     }
   );
 
- setUserFormSubmit(closePhotoEditing);
+setUserFormSubmit(closePhotoEditing);

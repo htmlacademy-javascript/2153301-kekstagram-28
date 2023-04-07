@@ -3,11 +3,8 @@ import { resetEffects } from './slider-effect.js';
 import { isEscapeKey, showAlert } from './util.js';
 import { pristine } from './validation-input.js';
 import { sendData} from './api.js';
+import {showErrorMessage, showSuccessMessage} from './modal-error-success.js';
 
-const SubmitButtonText = {
-  IDLE: 'Отправить',
-  SENDING: 'Отправляется...'
-};
 const inputUploadFile = document.querySelector('#upload-file');
 // модальное окно редактирования фотографии
 const imgOverlay = document.querySelector('.img-upload__overlay');
@@ -18,7 +15,7 @@ const uploadCancel = document.querySelector('#upload-cancel');
 // поля комментариев и хештегов
 const commentField = document.querySelector('#text-description');
 const hashtagsField = document.querySelector('#text-hashtags');
-const uploadForm = document.querySelector('.img-upload__form');
+const uploadForm = document.querySelector('#upload-select-image');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 
@@ -42,7 +39,7 @@ const removeListenerField = (evt) => {
 const closePhotoEditing = () => {
   imgOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  inputUploadFile.reset;
+  uploadForm.reset();
   pristine.reset();
   resetScale();
   resetEffects();
@@ -64,12 +61,10 @@ const handleUserForm = () => {
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.IDLE;
 };
 
 const setUserFormSubmit = (onSuccess) => {
@@ -79,16 +74,18 @@ const setUserFormSubmit = (onSuccess) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      closePhotoEditing();
       sendData(new FormData(evt.target))
-        .then(onSuccess)
+        .then(() => {
+          onSuccess();
+          showSuccessMessage();
+        })
         .catch(
           (err) => {
             showAlert(err.message);
+            showErrorMessage();
           }
         )
         .finally(unblockSubmitButton);
-
     }
   });
 }

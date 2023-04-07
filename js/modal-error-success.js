@@ -1,32 +1,52 @@
 import { isEscapeKey } from './util.js';
 
 const templateError = document.querySelector('#error').content.querySelector('.error');
-const errorMessage = templateError.querySelector('.error__title');
-const errorButton = templateError.querySelector('.error__button');
-
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
-const successMessage = templateSuccess.querySelector('.success__title');
-const successButton = templateSuccess.querySelector('.success__button');
 
-const body = document.querySelector('body');
+const showSuccessMessage = () => {
+  const cloneSuccessSend = templateSuccess.cloneNode(true);
+  const successButton = cloneSuccessSend.querySelector('.success__button');
 
-const closeModalMessage = () => {
-  
+  successButton.addEventListener('click', () => {
+    cloneSuccessSend.remove();
+  });
+
+  cloneSuccessSend.addEventListener('click', (evt) => {
+    if (evt.target.getAttribute('id') === 'success-block') {
+      cloneSuccessSend.remove();
+    }
+  });
+
+  document.body.append(cloneSuccessSend);
+
+  document.addEventListener('keydown', (evt) => {
+    if(isEscapeKey(evt)) {
+      cloneSuccessSend.remove();
+    }
+  });
 };
 
-const handleEscapeKeydown = (evt) => {
-  if(isEscapeKey(evt)) {
-
-  }
-};
-
-const sendDataError = () => {
+const showErrorMessage = () => {
   const cloneErrorSend = templateError.cloneNode(true);
+  const errorButton = cloneErrorSend.querySelector('.error__button');
+
+  errorButton.addEventListener('click', () => {
+    cloneErrorSend.remove();
+  });
+
+  cloneErrorSend.addEventListener('click', (evt) => {
+    if (evt.target.getAttribute('id') === 'error-block') {
+      cloneErrorSend.remove();
+    }
+  });
+
+  document.body.append(cloneErrorSend);
+
+  document.addEventListener('keydown', (evt) => {
+    if(isEscapeKey(evt)) {
+      cloneErrorSend.remove();
+    }
+  });
 };
 
-
-// body.append(cloneErrorSend)
-
-
-
-
+export {showSuccessMessage, showErrorMessage};
