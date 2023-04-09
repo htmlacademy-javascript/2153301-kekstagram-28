@@ -1,10 +1,19 @@
-import { createObjects } from './constants.js';
 import { renderThumbnails } from './create-thumbnails.js';
 import { addHandlers } from './displayBigPicture.js';
-import { handleUserForm } from './user-form.js';
+import { handleUserForm, setUserFormSubmit, closePhotoEditing} from './user-form.js';
+import { getData} from './api.js';
+import {showAlert} from './util.js';
 
-const objects = createObjects();
+getData()
+  .then((photos) => {
+    renderThumbnails(photos);
+    handleUserForm(photos);
+    addHandlers(photos);
+  })
+  .catch(
+    (err) => {
+      showAlert(err.message);
+    }
+  );
 
-renderThumbnails(objects);
-addHandlers(objects);
-handleUserForm();
+setUserFormSubmit(closePhotoEditing);
