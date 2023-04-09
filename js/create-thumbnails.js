@@ -7,15 +7,32 @@ const imgFilters = document.querySelector('.img-filters');
 const imgFilterDefault = imgFilters.querySelector('#filter-default');
 const imgFilterRandomUnique = imgFilters.querySelector('#filter-random');
 const imgFilterDiscussed = imgFilters.querySelector('#filter-discussed');
+const activeFilter = imgFilters.querySelector('.img-filters__button--active')
 
 const showImgFilter = () => {
-  imgFilters.classList.remove('img-filters--inactive');
+  imgFilters.classList.remove('img-filters--inactive')
 };
 
 
 const comparePhotoComment = (photoA, photoB) => {
   return photoB.comments.length - photoA.comments.length
 };
+
+// const chooseShowDiscussedPhotos = () => {
+//     .slice()
+//     .sort(comparePhotoComment)
+// };
+
+// filter = chooseShowDiscussedPhotos();
+
+// imgFilterDiscussed.addEventListener('click', () => {
+//
+//   }
+// })
+
+// .slice()
+// .sort(comparePhotoComment)
+let filter = 1;
 
 // создание миниатюры
 const createThumbnail = ({ url, likes, comments, description, id }) => {
@@ -32,9 +49,13 @@ const createThumbnail = ({ url, likes, comments, description, id }) => {
 
 const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
-  pictures
-    .slice()
-    .sort(comparePhotoComment)
+  if ( 2 > 1 )
+    pictures
+      .slice()
+      .sort(comparePhotoComment)
+
+
+
     .forEach((picture) => {
       const thumbnail = createThumbnail(picture);
       fragment.append(thumbnail);
