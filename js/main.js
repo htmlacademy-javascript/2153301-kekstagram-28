@@ -11,7 +11,7 @@ getData()
     renderThumbnails(photos);
     changeActualSorting(debounce(() => renderThumbnails(photos),
       RERENDER_DELAY,
-      ));
+    ));
     handleUserForm(photos);
     addHandlers(photos);
   })

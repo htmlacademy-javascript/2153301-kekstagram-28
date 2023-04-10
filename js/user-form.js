@@ -100,6 +100,6 @@ const setUserFormSubmit = (onSuccess) => {
         .finally(unblockSubmitButton);
     }
   });
-}
+};
 
 export {handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditing};

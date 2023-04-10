@@ -12,7 +12,7 @@ const imgFilterDiscussed = filterElement.querySelector('#filter-discussed');
 
 let currentFilter = filterElement.querySelector('.img-filters__button--active');
 
-// отслеживание клика и присваивание currentFilter нового значения
+// отслеживание клика и присваивание currentFilter новое значение
 const changeActualSorting = (cb) => {
   filterElement.addEventListener('click', (evt) => {
     if (evt.target.matches('.img-filters__button')) {
@@ -20,7 +20,6 @@ const changeActualSorting = (cb) => {
       evt.target.classList.add('img-filters__button--active');
       currentFilter = evt.target;
       cb();
-      console.log(currentFilter);
       return currentFilter;
     }
   });
@@ -40,7 +39,7 @@ const getFilteredPictures = (choice) => {
 };
 
 const sortByComments = (photoA, photoB) => {
-  return photoB.comments.length - photoA.comments.length
+  return photoB.comments.length - photoA.comments.length;
 };
 
 // создание миниатюры
