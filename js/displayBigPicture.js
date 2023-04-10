@@ -9,6 +9,8 @@ const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
+
+
 // функция отслеживающая нажатие ENTER
 
 const closeBigPicture = () => {
@@ -28,6 +30,7 @@ const showBigPicture = (objects, link) => {
     return item.id === Number(link.dataset.thumbnailId);
   });
   bigPictureWrap.classList.remove('hidden');
+
   bigPictureImg.src = ad.url;
   likesCount.textContent = ad.likes;
   commentsCount.textContent = String(ad.comments.length);
@@ -48,15 +51,26 @@ const showBigPicture = (objects, link) => {
   comments.append(commentFragment);
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
-  const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
-  const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 
   socialCaption.textContent = ad.description;
-  socialCommentCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', handleEscapeKeydown);
+};
+
+// let commentsShown = 0;
+// let commentsArray = [] ;
+//
+const renderComments = () => {
+  const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
+  const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
+
+  socialCommentCount.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+  // commentsShown += 5;
+  // if (commentsShown > comments.length) {
+  //
+  // }
 };
 
 // функция отслеживающая нажатие ENTER и клик на миниатюре
