@@ -1,38 +1,50 @@
+const PICTURES_COUNT = 10;
+
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 
 // контейнер для фотографий
 const container = document.querySelector('.pictures');
-// блок сортировки фотографий
-const imgFilters = document.querySelector('.img-filters');
-const imgFilterDefault = imgFilters.querySelector('#filter-default');
-const imgFilterRandomUnique = imgFilters.querySelector('#filter-random');
-const imgFilterDiscussed = imgFilters.querySelector('#filter-discussed');
-const activeFilter = imgFilters.querySelector('.img-filters__button--active')
 
+// блок сортировки фотографий
+const filterElement = document.querySelector('.img-filters');
+const imgFilterDefault = filterElement.querySelector('#filter-default');
+const imgFilterRandomUnique = filterElement.querySelector('#filter-random');
+const imgFilterDiscussed = filterElement.querySelector('#filter-discussed');
 const showImgFilter = () => {
-  imgFilters.classList.remove('img-filters--inactive')
+  filterElement.classList.remove('img-filters--inactive');
 };
 
+let currentFilter = filterElement.querySelector('.img-filters__button--active');
 
-const comparePhotoComment = (photoA, photoB) => {
+// отслеживание клика и присваивание currentFilter нового значения
+filterElement.addEventListener('click', (evt) => {
+
+  if (evt.target.matches('.img-filters__button')) {
+    currentFilter.classList.remove('img-filters__button--active');
+    evt.target.classList.add('img-filters__button--active');
+    currentFilter = evt.target;
+
+    console.log(currentFilter);
+    return currentFilter;
+  }
+});
+console.log();
+const sortRandomly = () => Math.random() - 0.5;
+
+const getFilteredPictures = (choice) => {
+  switch (currentFilter) {
+    case 1:
+      return choice.slice().sort(sortRandomly).slice(0, PICTURES_COUNT);
+    case imgFilterDiscussed:
+      return choice.slice().sort(sortByComments);
+    default :
+      return choice.slice();
+  }
+};
+
+const sortByComments = (photoA, photoB) => {
   return photoB.comments.length - photoA.comments.length
 };
-
-// const chooseShowDiscussedPhotos = () => {
-//     .slice()
-//     .sort(comparePhotoComment)
-// };
-
-// filter = chooseShowDiscussedPhotos();
-
-// imgFilterDiscussed.addEventListener('click', () => {
-//
-//   }
-// })
-
-// .slice()
-// .sort(comparePhotoComment)
-let filter = 1;
 
 // создание миниатюры
 const createThumbnail = ({ url, likes, comments, description, id }) => {
@@ -49,13 +61,8 @@ const createThumbnail = ({ url, likes, comments, description, id }) => {
 
 const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
-  if ( 2 > 1 )
-    pictures
-      .slice()
-      .sort(comparePhotoComment)
 
-
-
+  getFilteredPictures(pictures)
     .forEach((picture) => {
       const thumbnail = createThumbnail(picture);
       fragment.append(thumbnail);
@@ -63,4 +70,4 @@ const renderThumbnails = (pictures) => {
   container.append(fragment);
 };
 
-export { renderThumbnails, showImgFilter,  };
+export { renderThumbnails, showImgFilter };
