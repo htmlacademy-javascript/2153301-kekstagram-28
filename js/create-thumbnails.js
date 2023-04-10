@@ -7,33 +7,30 @@ const container = document.querySelector('.pictures');
 
 // блок сортировки фотографий
 const filterElement = document.querySelector('.img-filters');
-const imgFilterDefault = filterElement.querySelector('#filter-default');
 const imgFilterRandomUnique = filterElement.querySelector('#filter-random');
 const imgFilterDiscussed = filterElement.querySelector('#filter-discussed');
-const showImgFilter = () => {
-  filterElement.classList.remove('img-filters--inactive');
-};
 
 let currentFilter = filterElement.querySelector('.img-filters__button--active');
 
 // отслеживание клика и присваивание currentFilter нового значения
-filterElement.addEventListener('click', (evt) => {
+const changeActualSorting = (cb) => {
+  filterElement.addEventListener('click', (evt) => {
+    if (evt.target.matches('.img-filters__button')) {
+      currentFilter.classList.remove('img-filters__button--active');
+      evt.target.classList.add('img-filters__button--active');
+      currentFilter = evt.target;
+      cb();
+      console.log(currentFilter);
+      return currentFilter;
+    }
+  });
+};
 
-  if (evt.target.matches('.img-filters__button')) {
-    currentFilter.classList.remove('img-filters__button--active');
-    evt.target.classList.add('img-filters__button--active');
-    currentFilter = evt.target;
-
-    console.log(currentFilter);
-    return currentFilter;
-  }
-});
-console.log();
 const sortRandomly = () => Math.random() - 0.5;
 
 const getFilteredPictures = (choice) => {
   switch (currentFilter) {
-    case 1:
+    case imgFilterRandomUnique:
       return choice.slice().sort(sortRandomly).slice(0, PICTURES_COUNT);
     case imgFilterDiscussed:
       return choice.slice().sort(sortByComments);
@@ -67,7 +64,9 @@ const renderThumbnails = (pictures) => {
       const thumbnail = createThumbnail(picture);
       fragment.append(thumbnail);
     });
+  // container.innerHTML = '';
   container.append(fragment);
+  filterElement.classList.remove('img-filters--inactive');
 };
 
-export { renderThumbnails, showImgFilter };
+export { renderThumbnails, changeActualSorting};
