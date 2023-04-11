@@ -23,9 +23,9 @@ const handleEscapeKeydown = (evt) => {
 };
 
 const showBigPicture = (objects, link) => {
-  const ad = objects.find((item) => {
-    return item.id === Number(link.dataset.thumbnailId);
-  });
+  const ad = objects.find((item) =>
+    item.id === Number(link.dataset.thumbnailId)
+  );
   bigPictureWrap.classList.remove('hidden');
 
   bigPictureImg.src = ad.url;
