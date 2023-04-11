@@ -9,10 +9,7 @@ const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
-
-
 // функция отслеживающая нажатие ENTER
-
 const closeBigPicture = () => {
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -51,26 +48,15 @@ const showBigPicture = (objects, link) => {
   comments.append(commentFragment);
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
-
-  socialCaption.textContent = ad.description;
-  body.classList.add('modal-open');
-
-  document.addEventListener('keydown', handleEscapeKeydown);
-};
-
-// let commentsShown = 0;
-// let commentsArray = [] ;
-//
-const renderComments = () => {
   const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
   const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  // commentsShown += 5;
-  // if (commentsShown > comments.length) {
-  //
-  // }
+  socialCaption.textContent = ad.description;
+  body.classList.add('modal-open');
+
+  document.addEventListener('keydown', handleEscapeKeydown);
 };
 
 // функция отслеживающая нажатие ENTER и клик на миниатюре

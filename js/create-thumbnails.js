@@ -25,6 +25,10 @@ const changeActualSorting = (cb) => {
   });
 };
 
+const sortByComments = (photoA, photoB) => {
+  return photoB.comments.length - photoA.comments.length;
+};
+
 const sortRandomly = () => Math.random() - 0.5;
 
 const getFilteredPictures = (choice) => {
@@ -36,10 +40,6 @@ const getFilteredPictures = (choice) => {
     default :
       return choice.slice();
   }
-};
-
-const sortByComments = (photoA, photoB) => {
-  return photoB.comments.length - photoA.comments.length;
 };
 
 // создание миниатюры
@@ -56,6 +56,8 @@ const createThumbnail = ({ url, likes, comments, description, id }) => {
 };
 
 const renderThumbnails = (pictures) => {
+  container.querySelectorAll('.picture').forEach((element) => element.remove());
+
   const fragment = document.createDocumentFragment();
 
   getFilteredPictures(pictures)
@@ -63,7 +65,7 @@ const renderThumbnails = (pictures) => {
       const thumbnail = createThumbnail(picture);
       fragment.append(thumbnail);
     });
-  // container.innerHTML = '';
+
   container.append(fragment);
   filterElement.classList.remove('img-filters--inactive');
 };
