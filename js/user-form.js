@@ -22,7 +22,6 @@ const hashtagsField = document.querySelector('#text-hashtags');
 const uploadForm = document.querySelector('#upload-select-image');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 
-
 const handleEscapeKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     closePhotoEditing();

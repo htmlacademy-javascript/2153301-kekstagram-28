@@ -25,9 +25,9 @@ const changeActualSorting = (cb) => {
   });
 };
 
-const sortByComments = (photoA, photoB) => {
-  return photoB.comments.length - photoA.comments.length;
-};
+const sortByComments = (photoA, photoB) =>
+  photoB.comments.length - photoA.comments.length;
+
 
 const sortRandomly = () => Math.random() - 0.5;
 
