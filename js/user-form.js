@@ -94,6 +94,7 @@ const setUserFormSubmit = (onSuccess) => {
           (err) => {
             showAlert(err.message);
             showErrorMessage();
+            document.removeEventListener('keydown', handleEscapeKeydown);
           }
         )
         .finally(unblockSubmitButton);
