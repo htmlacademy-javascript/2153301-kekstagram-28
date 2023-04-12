@@ -13,12 +13,12 @@ const body = document.querySelector('body');
 const closeBigPicture = () => {
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', handleEscapeKeydown);
 };
 
 const handleEscapeKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     closeBigPicture();
+    document.removeEventListener('keydown', handleEscapeKeydown);
   }
 };
 
