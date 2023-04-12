@@ -10,24 +10,24 @@ const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
 // функция отслеживающая нажатие ENTER
-
 const closeBigPicture = () => {
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', handleEscapeKeydown);
 };
 
 const handleEscapeKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     closeBigPicture();
+    document.removeEventListener('keydown', handleEscapeKeydown);
   }
 };
 
 const showBigPicture = (objects, link) => {
-  const ad = objects.find((item) => {
-    return item.id === Number(link.dataset.thumbnailId);
-  });
+  const ad = objects.find((item) =>
+    item.id === Number(link.dataset.thumbnailId)
+  );
   bigPictureWrap.classList.remove('hidden');
+
   bigPictureImg.src = ad.url;
   likesCount.textContent = ad.likes;
   commentsCount.textContent = String(ad.comments.length);
@@ -51,9 +51,9 @@ const showBigPicture = (objects, link) => {
   const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
   const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 
-  socialCaption.textContent = ad.description;
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
+  socialCaption.textContent = ad.description;
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', handleEscapeKeydown);
