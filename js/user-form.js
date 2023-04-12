@@ -22,12 +22,6 @@ const hashtagsField = document.querySelector('#text-hashtags');
 const uploadForm = document.querySelector('#upload-select-image');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 
-const handleEscapeKeydown = (evt) => {
-  if(isEscapeKey(evt)) {
-    closePhotoEditing();
-  }
-};
-
 const showPhotoEditing = () => {
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -46,10 +40,16 @@ const closePhotoEditing = () => {
   pristine.reset();
   resetScale();
   resetEffects();
-  document.removeEventListener('keydown', handleEscapeKeydown);
   uploadCancel.removeEventListener('click', closePhotoEditing);
   commentField.removeEventListener('keydown', removeListenerField);
   hashtagsField.removeEventListener('keydown', removeListenerField);
+};
+
+const handleEscapeKeydown = (evt) => {
+  if(isEscapeKey(evt)) {
+    closePhotoEditing();
+    document.removeEventListener('keydown', handleEscapeKeydown);
+  }
 };
 
 const handleUserForm = () => {
