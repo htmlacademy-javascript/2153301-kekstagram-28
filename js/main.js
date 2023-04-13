@@ -1,5 +1,4 @@
 import { renderThumbnails, changeActualSorting } from './create-thumbnails.js';
-import { addHandlers } from './displayBigPicture.js';
 import { handleUserForm, setUserFormSubmit, closePhotoEditing } from './user-form.js';
 import { getData } from './api.js';
 import { showAlert, debounce } from './util.js';
@@ -13,7 +12,6 @@ getData()
       RERENDER_DELAY,
     ));
     handleUserForm(photos);
-    addHandlers(photos);
   })
   .catch(
     (err) => {
