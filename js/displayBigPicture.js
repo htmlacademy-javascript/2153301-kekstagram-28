@@ -10,16 +10,19 @@ const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
+const commentsShown = 0;
+let commentsArray = [];
+
 // функция отслеживающая нажатие ENTER
 const closeBigPicture = () => {
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
 };
 
-const handleEscapeKeydown = (evt) => {
+const escapeKeydownHandler = (evt) => {
   if(isEscapeKey(evt)) {
     closeBigPicture();
-    document.removeEventListener('keydown', handleEscapeKeydown);
+    document.removeEventListener('keydown', escapeKeydownHandler);
   }
 };
 
@@ -49,17 +52,34 @@ const showBigPicture = (objects, link) => {
   comments.textContent = '';
   comments.append(commentFragment);
 
-  const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
+  const allComments = comments.querySelectorAll('.social__comment');
+  console.log(allComments);
+  allComments.classList.add('hidden');
+
+
+  // const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
   // const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
-
-  const oneComment = comments.children;
-  const numberOfComments = templateThumbnail.comments.length;
-  const startingNumberComments = Number(socialCommentCount.querySelector('.comment-dispenser').textContent);
-
+  //
+  // const COMMENTS_PER_PORTION = 5;
+  // const numberOfComments = templateThumbnail.comments.length;
 
 
 
-  console.log(startingNumberComments);
+  // commentsShown += COMMENTS_PER_PORTION;
+  // if (commentsShown >= numberOfComments.length) {
+  //   commentsLoader.classList.add('hidden');
+  //   commentsShown = numberOfComments.length
+  // } else {
+  //   commentsLoader.classList.remove('hidden');
+  // }
+  // const fragment =  document.createDocumentFragment();
+  // for(let i = 0; i < commentsShown; i++) {
+  //   const commentElement
+  // }
+
+  // const oneComment = comments.children;
+
+  // const startingNumberComments = Number(socialCommentCount.querySelector('.comment-dispenser').textContent);
 
 
 
@@ -68,7 +88,7 @@ const showBigPicture = (objects, link) => {
   socialCaption.textContent = templateThumbnail.description;
   body.classList.add('modal-open');
 
-  document.addEventListener('keydown', handleEscapeKeydown);
+  document.addEventListener('keydown', escapeKeydownHandler);
 };
 
 // функция отслеживающая нажатие ENTER и клик на миниатюре
