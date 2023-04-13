@@ -49,16 +49,21 @@ const showBigPicture = (objects, link) => {
   comments.textContent = '';
   comments.append(commentFragment);
 
-  // const oneComment = comments.querySelectorAll('.social__comment').forEach((item) =>
-  //   item.classList.add('hidden'));
-
-
-
   const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
-  const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
+  // const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
+
+  const oneComment = comments.children;
+  const numberOfComments = templateThumbnail.comments.length;
+  const startingNumberComments = Number(socialCommentCount.querySelector('.comment-dispenser').textContent);
+
+
+
+
+  console.log(startingNumberComments);
+
+
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
-
 
   socialCaption.textContent = templateThumbnail.description;
   body.classList.add('modal-open');
