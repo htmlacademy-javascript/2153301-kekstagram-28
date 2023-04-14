@@ -5,9 +5,12 @@ const bigPictureImg = bigPictureWrap.querySelector('.big-picture__img img');
 const likesCount = bigPictureWrap.querySelector('.likes-count');
 const commentsCount = bigPictureWrap.querySelector('.comments-count');
 
-const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
-let commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
 const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
+const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
+
+let commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
+let currentCommentCount = 0;
+let currentMaxValueDispenser = 5;
 
 const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
@@ -18,6 +21,8 @@ const closeBigPicture = () => {
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
   commentDispenser.textContent = '';
+  currentCommentCount = 0;
+  currentMaxValueDispenser = 5;
 };
 
 const escapeKeydownHandler = (evt) => {
@@ -55,16 +60,33 @@ const showBigPicture = (objects, link) => {
 
   const numberOfComments = templateThumbnail.comments.length;
 
-  if (numberOfComments < 5) {
-    commentsLoader.classList.add('hidden');
-    commentDispenser.textContent = numberOfComments;
-  } else {
-    commentDispenser.textContent = '5';
-    commentsLoader.classList.remove('hidden');
+  const displayComments = () => {
+
+    if (numberOfComments < currentMaxValueDispenser) {
+      commentsLoader.classList.add('hidden');
+      commentDispenser.textContent = numberOfComments;
+    } else {
+      commentDispenser.textContent = String(currentCommentCount + 5);
+      commentsLoader.classList.remove('hidden');
+    }
+
+    currentMaxValueDispenser += 5;
+    console.log(currentMaxValueDispenser);
   }
 
+  displayComments();
+
+  currentCommentCount += Number(commentDispenser.textContent);
+
+
+
+  commentsLoader.addEventListener('click', () => {
+    displayComments();
+  })
+
+
   // console.log('привет');
-  // commentDispenser = 5;
+
   // const oneComment = comments.children;
   // oneComment.classList.add('hidden')
 
