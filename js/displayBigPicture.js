@@ -5,18 +5,19 @@ const bigPictureImg = bigPictureWrap.querySelector('.big-picture__img img');
 const likesCount = bigPictureWrap.querySelector('.likes-count');
 const commentsCount = bigPictureWrap.querySelector('.comments-count');
 
+const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
+let commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
+const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 
 const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
-const commentsShown = 0;
-let commentsArray = [];
-
 // функция отслеживающая нажатие ENTER
 const closeBigPicture = () => {
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
+  commentDispenser.textContent = '';
 };
 
 const escapeKeydownHandler = (evt) => {
@@ -52,36 +53,26 @@ const showBigPicture = (objects, link) => {
   comments.textContent = '';
   comments.append(commentFragment);
 
-  const allComments = comments.querySelectorAll('.social__comment');
-  console.log(allComments);
-  allComments.classList.add('hidden');
+  const numberOfComments = templateThumbnail.comments.length;
+
+  if (numberOfComments < 5) {
+    commentsLoader.classList.add('hidden');
+    commentDispenser.textContent = numberOfComments;
+  } else {
+    commentDispenser.textContent = '5';
+    commentsLoader.classList.remove('hidden');
+  }
+
+  // console.log('привет');
+  // commentDispenser = 5;
+  // const oneComment = comments.children;
+  // oneComment.classList.add('hidden')
 
 
-  // const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
-  // const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
-  //
-  // const COMMENTS_PER_PORTION = 5;
-  // const numberOfComments = templateThumbnail.comments.length;
 
-
+  // const allComments = comments.querySelectorAll('.social__comment');
 
   // commentsShown += COMMENTS_PER_PORTION;
-  // if (commentsShown >= numberOfComments.length) {
-  //   commentsLoader.classList.add('hidden');
-  //   commentsShown = numberOfComments.length
-  // } else {
-  //   commentsLoader.classList.remove('hidden');
-  // }
-  // const fragment =  document.createDocumentFragment();
-  // for(let i = 0; i < commentsShown; i++) {
-  //   const commentElement
-  // }
-
-  // const oneComment = comments.children;
-
-  // const startingNumberComments = Number(socialCommentCount.querySelector('.comment-dispenser').textContent);
-
-
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
 
