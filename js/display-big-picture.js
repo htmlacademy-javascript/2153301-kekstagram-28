@@ -23,6 +23,7 @@ const closeBigPicture = () => {
   commentDispenser.textContent = '';
   currentCommentCount = 0;
   currentMaxValueDispenser = 5;
+  commentsLoader.removeEventListener('click',  clickShowMoreHandler);
 };
 
 const escapeKeydownHandler = (evt) => {
@@ -31,6 +32,12 @@ const escapeKeydownHandler = (evt) => {
     document.removeEventListener('keydown', escapeKeydownHandler);
   }
 };
+
+const clickShowMoreHandler = (rak) => {
+  commentsLoader.addEventListener('click', () => {
+    rak();
+  })
+}
 
 const showBigPicture = (objects, link) => {
   const templateThumbnail = objects.find((item) =>
@@ -64,7 +71,6 @@ const showBigPicture = (objects, link) => {
     item.classList.add('hidden')
   })
 
-
   const numberOfComments = templateThumbnail.comments.length;
 
   const displayComments = () => {
@@ -75,26 +81,18 @@ const showBigPicture = (objects, link) => {
     } else {
       commentDispenser.textContent = String(currentCommentCount + 5);
       currentCommentCount = Number(commentDispenser.textContent);
+      console.log(currentCommentCount);
       commentsLoader.classList.remove('hidden');
     }
-
     currentMaxValueDispenser += 5;
   }
 
   displayComments();
 
-  commentsLoader.addEventListener('click', () => {
-    displayComments();
-  })
-
-
-  // console.log('привет');
+  clickShowMoreHandler(displayComments);
 
 
 
-
-
-  // const allComments = comments.querySelectorAll('.social__comment');
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
 

@@ -1,4 +1,4 @@
-import {addHandlers} from './displayBigPicture.js';
+import {addHandlers} from './display-big-picture.js';
 
 
 const PICTURES_COUNT = 10;
