@@ -58,6 +58,13 @@ const showBigPicture = (objects, link) => {
   comments.textContent = '';
   comments.append(commentFragment);
 
+  const allComments = comments.childNodes;
+
+  allComments.forEach((item) => {
+    item.classList.add('hidden')
+  })
+
+
   const numberOfComments = templateThumbnail.comments.length;
 
   const displayComments = () => {
@@ -67,18 +74,14 @@ const showBigPicture = (objects, link) => {
       commentDispenser.textContent = numberOfComments;
     } else {
       commentDispenser.textContent = String(currentCommentCount + 5);
+      currentCommentCount = Number(commentDispenser.textContent);
       commentsLoader.classList.remove('hidden');
     }
 
     currentMaxValueDispenser += 5;
-    console.log(currentMaxValueDispenser);
   }
 
   displayComments();
-
-  currentCommentCount += Number(commentDispenser.textContent);
-
-
 
   commentsLoader.addEventListener('click', () => {
     displayComments();
@@ -87,14 +90,11 @@ const showBigPicture = (objects, link) => {
 
   // console.log('привет');
 
-  // const oneComment = comments.children;
-  // oneComment.classList.add('hidden')
+
 
 
 
   // const allComments = comments.querySelectorAll('.social__comment');
-
-  // commentsShown += COMMENTS_PER_PORTION;
 
   const socialCaption = bigPictureWrap.querySelector('.social__caption');
 
