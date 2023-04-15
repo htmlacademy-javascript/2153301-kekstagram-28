@@ -3,18 +3,9 @@ import { isEscapeKey } from './util.js';
 const templateError = document.querySelector('#error').content.querySelector('.error');
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
 
-const escapeKeydownHandler = (evt) => {
-  if (isEscapeKey(evt)) {
-    cloneSuccessSend.remove();
-    document.removeEventListener('keydown', escapeKeydownHandler);
-  }
-};
-
 const showSuccessMessage = () => {
   const cloneSuccessSend = templateSuccess.cloneNode(true);
   const successButton = cloneSuccessSend.querySelector('.success__button');
-
-
 
   successButton.addEventListener('click', () => {
     cloneSuccessSend.remove();
@@ -31,8 +22,18 @@ const showSuccessMessage = () => {
 
 
 
+  const escapeKeydownHandler = (evt) => {
+    if (isEscapeKey(evt)) {
+      cloneSuccessSend.remove();
+      closeSuccessMessage();
+    }
+  };
 
-  document.addEventListener('keydown', escapeKeydownHandler)
+  const closeSuccessMessage = () => {
+    document.removeEventListener('keydown', escapeKeydownHandler);
+  };
+
+  document.addEventListener('keydown', escapeKeydownHandler);
 
 };
 

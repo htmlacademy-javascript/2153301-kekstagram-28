@@ -8,19 +8,13 @@ const commentsCount = bigPictureWrap.querySelector('.comments-count');
 const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
 
-let commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
+const commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
 let currentCommentCount = 0;
 let currentMaxValueDispenser = 5;
 
 const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
-
-
-
-
-
-
 
 const showBigPicture = (objects, link) => {
   const templateThumbnail = objects.find((item) =>
@@ -51,30 +45,28 @@ const showBigPicture = (objects, link) => {
   const allComments = comments.childNodes;
 
   allComments.forEach((item) => {
-    item.classList.add('hidden')
-  })
+    item.classList.add('hidden');
+  });
 
   const numberOfComments = templateThumbnail.comments.length;
 
-  const displayComments = () => {
 
+  const displayComments = () => {
     if (numberOfComments < currentMaxValueDispenser) {
       commentsLoader.classList.add('hidden');
       commentDispenser.textContent = numberOfComments;
     } else {
       commentDispenser.textContent = String(currentCommentCount + 5);
       currentCommentCount = Number(commentDispenser.textContent);
-      console.log(currentCommentCount);
       commentsLoader.classList.remove('hidden');
     }
     currentMaxValueDispenser += 5;
-  }
+  };
 
   displayComments();
 
   commentsLoader.addEventListener('click', displayComments);
 
-  // функция отслеживающая нажатие ENTER
   const closeBigPicture = () => {
     bigPictureWrap.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -82,12 +74,12 @@ const showBigPicture = (objects, link) => {
     currentCommentCount = 0;
     currentMaxValueDispenser = 5;
     commentsLoader.removeEventListener('click', displayComments);
-    document.removeEventListener('keydown', escapeKeydownHandler);
   };
 
   const escapeKeydownHandler = (evt) => {
     if(isEscapeKey(evt)) {
       closeBigPicture();
+      document.removeEventListener('keydown', escapeKeydownHandler);
     }
   };
 
