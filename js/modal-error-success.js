@@ -19,18 +19,24 @@ const showSuccessMessage = () => {
 
   document.body.append(cloneSuccessSend);
 
-
-
+  // const escapeKeydownHandler = (evt) => {
+  //   if (isEscapeKey(evt)) {
+  //     cloneSuccessSend.remove();
+  //     closeSuccessMessage();
+  //   }
+  // };
+  //
+  // const closeSuccessMessage = () => {
+  //   document.removeEventListener('keydown', escapeKeydownHandler);
+  // };
+  //
+  // document.addEventListener('keydown', escapeKeydownHandler);
 
   const escapeKeydownHandler = (evt) => {
-    if (isEscapeKey(evt)) {
+    if(isEscapeKey(evt)) {
       cloneSuccessSend.remove();
-      closeSuccessMessage();
+      document.removeEventListener('keydown', escapeKeydownHandler);
     }
-  };
-
-  const closeSuccessMessage = () => {
-    document.removeEventListener('keydown', escapeKeydownHandler);
   };
 
   document.addEventListener('keydown', escapeKeydownHandler);

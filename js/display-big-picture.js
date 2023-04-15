@@ -50,7 +50,6 @@ const showBigPicture = (objects, link) => {
 
   const numberOfComments = templateThumbnail.comments.length;
 
-
   const displayComments = () => {
     if (numberOfComments < currentMaxValueDispenser) {
       commentsLoader.classList.add('hidden');
