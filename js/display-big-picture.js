@@ -16,28 +16,11 @@ const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
 const body = document.querySelector('body');
 
-// функция отслеживающая нажатие ENTER
-const closeBigPicture = () => {
-  bigPictureWrap.classList.add('hidden');
-  body.classList.remove('modal-open');
-  commentDispenser.textContent = '';
-  currentCommentCount = 0;
-  currentMaxValueDispenser = 5;
-  commentsLoader.removeEventListener('click',  clickShowMoreHandler);
-};
 
-const escapeKeydownHandler = (evt) => {
-  if(isEscapeKey(evt)) {
-    closeBigPicture();
-    document.removeEventListener('keydown', escapeKeydownHandler);
-  }
-};
 
-const clickShowMoreHandler = (rak) => {
-  commentsLoader.addEventListener('click', () => {
-    rak();
-  })
-}
+
+
+
 
 const showBigPicture = (objects, link) => {
   const templateThumbnail = objects.find((item) =>
@@ -89,14 +72,31 @@ const showBigPicture = (objects, link) => {
 
   displayComments();
 
-  clickShowMoreHandler(displayComments);
+  commentsLoader.addEventListener('click', displayComments);
 
+  // функция отслеживающая нажатие ENTER
+  const closeBigPicture = () => {
+    bigPictureWrap.classList.add('hidden');
+    body.classList.remove('modal-open');
+    commentDispenser.textContent = '';
+    currentCommentCount = 0;
+    currentMaxValueDispenser = 5;
+    commentsLoader.removeEventListener('click', displayComments);
+    document.removeEventListener('keydown', escapeKeydownHandler);
+  };
 
+  const escapeKeydownHandler = (evt) => {
+    if(isEscapeKey(evt)) {
+      closeBigPicture();
+    }
+  };
 
+  const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
 
-  const socialCaption = bigPictureWrap.querySelector('.social__caption');
+  bigPictureCancel.addEventListener('click', () => {
+    closeBigPicture();
+  });
 
-  socialCaption.textContent = templateThumbnail.description;
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', escapeKeydownHandler);
@@ -116,9 +116,3 @@ export const addHandlers = (objects) => {
     });
   });
 };
-
-const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
-
-bigPictureCancel.addEventListener('click', () => {
-  closeBigPicture();
-});

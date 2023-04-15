@@ -27,28 +27,28 @@ const showPhotoEditing = () => {
   body.classList.add('modal-open');
 };
 
-const removeListenerField = (evt) => {
+const removeListenerFieldHandler = (evt) => {
   if(isEscapeKey(evt)) {
     evt.stopPropagation();
   }
 };
 
-const closePhotoEditing = () => {
+const closePhotoEditingHandler = () => {
   imgOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadForm.reset();
   pristine.reset();
   resetScale();
   resetEffects();
-  uploadCancel.removeEventListener('click', closePhotoEditing);
-  commentField.removeEventListener('keydown', removeListenerField);
-  hashtagsField.removeEventListener('keydown', removeListenerField);
+  uploadCancel.removeEventListener('click', closePhotoEditingHandler);
+  commentField.removeEventListener('keydown', removeListenerFieldHandler);
+  hashtagsField.removeEventListener('keydown', removeListenerFieldHandler);
 };
 
-const handleEscapeKeydown = (evt) => {
+const EscapeKeydownHandler = (evt) => {
   if(isEscapeKey(evt)) {
-    closePhotoEditing();
-    document.removeEventListener('keydown', handleEscapeKeydown);
+    closePhotoEditingHandler();
+    document.removeEventListener('keydown', EscapeKeydownHandler);
   }
 };
 
@@ -63,10 +63,10 @@ const handleUserForm = () => {
       preview.src = URL.createObjectURL(file);
     }
 
-    document.addEventListener('keydown', handleEscapeKeydown);
-    uploadCancel.addEventListener('click', closePhotoEditing);
-    commentField.addEventListener('keydown', removeListenerField);
-    hashtagsField.addEventListener('keydown', removeListenerField) ;
+    document.addEventListener('keydown', EscapeKeydownHandler);
+    uploadCancel.addEventListener('click', closePhotoEditingHandler);
+    commentField.addEventListener('keydown', removeListenerFieldHandler);
+    hashtagsField.addEventListener('keydown', removeListenerFieldHandler) ;
   });
 };
 
@@ -94,7 +94,7 @@ const setUserFormSubmit = (onSuccess) => {
           (err) => {
             showAlert(err.message);
             showErrorMessage();
-            document.removeEventListener('keydown', handleEscapeKeydown);
+            document.removeEventListener('keydown', EscapeKeydownHandler);
           }
         )
         .finally(unblockSubmitButton);
@@ -102,4 +102,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditing};
+export {handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditingHandler};

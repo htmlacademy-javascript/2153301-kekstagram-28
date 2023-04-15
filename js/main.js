@@ -1,5 +1,5 @@
 import { renderThumbnails, changeActualSorting } from './create-thumbnails.js';
-import { handleUserForm, setUserFormSubmit, closePhotoEditing } from './user-form.js';
+import { handleUserForm, setUserFormSubmit, closePhotoEditingHandler } from './user-form.js';
 import { getData } from './api.js';
 import { showAlert, debounce } from './util.js';
 
@@ -19,4 +19,4 @@ getData()
     }
   );
 
-setUserFormSubmit(closePhotoEditing);
+setUserFormSubmit(closePhotoEditingHandler);
