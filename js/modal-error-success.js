@@ -1,3 +1,4 @@
+import { escapeKeydownUserFormHandler } from './user-form.js';
 import { isEscapeKey } from './util.js';
 
 const templateError = document.querySelector('#error').content.querySelector('.error');
@@ -35,21 +36,29 @@ const showErrorMessage = () => {
   const cloneErrorSend = templateError.cloneNode(true);
   const errorButton = cloneErrorSend.querySelector('.error__button');
 
+  document.body.append(cloneErrorSend);
+
+  const escapeKeydownModalHandler = (evt) => {
+    if(isEscapeKey(evt)) {
+      cloneErrorSend.remove();
+      document.removeEventListener('keydown', escapeKeydownModalHandler);
+      document.addEventListener('keydown', escapeKeydownUserFormHandler);
+    }
+  };
+
+  document.addEventListener('keydown', escapeKeydownModalHandler);
+
   errorButton.addEventListener('click', () => {
     cloneErrorSend.remove();
+    document.removeEventListener('keydown', escapeKeydownModalHandler);
+    document.addEventListener('keydown', escapeKeydownUserFormHandler);
   });
 
   cloneErrorSend.addEventListener('click', (evt) => {
     if (evt.target.getAttribute('id') === 'error-block') {
       cloneErrorSend.remove();
-    }
-  });
-
-  document.body.append(cloneErrorSend);
-
-  document.addEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt)) {
-      cloneErrorSend.remove();
+      document.removeEventListener('keydown', escapeKeydownModalHandler);
+      document.addEventListener('keydown', escapeKeydownUserFormHandler);
     }
   });
 };

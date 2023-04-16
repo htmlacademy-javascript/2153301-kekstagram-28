@@ -45,10 +45,10 @@ const closePhotoEditingHandler = () => {
   hashtagsField.removeEventListener('keydown', removeListenerFieldHandler);
 };
 
-const EscapeKeydownHandler = (evt) => {
+const escapeKeydownUserFormHandler = (evt) => {
   if(isEscapeKey(evt)) {
     closePhotoEditingHandler();
-    document.removeEventListener('keydown', EscapeKeydownHandler);
+    document.removeEventListener('keydown', escapeKeydownUserFormHandler);
   }
 };
 
@@ -63,7 +63,7 @@ const handleUserForm = () => {
       preview.src = URL.createObjectURL(file);
     }
 
-    document.addEventListener('keydown', EscapeKeydownHandler);
+    document.addEventListener('keydown', escapeKeydownUserFormHandler);
     uploadCancel.addEventListener('click', closePhotoEditingHandler);
     commentField.addEventListener('keydown', removeListenerFieldHandler);
     hashtagsField.addEventListener('keydown', removeListenerFieldHandler) ;
@@ -94,7 +94,7 @@ const setUserFormSubmit = (onSuccess) => {
           (err) => {
             showAlert(err.message);
             showErrorMessage();
-            document.removeEventListener('keydown', EscapeKeydownHandler);
+            document.removeEventListener('keydown', escapeKeydownUserFormHandler);
           }
         )
         .finally(unblockSubmitButton);
@@ -102,4 +102,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditingHandler};
+export {handleUserForm, setUserFormSubmit, showPhotoEditing, closePhotoEditingHandler, escapeKeydownUserFormHandler};
