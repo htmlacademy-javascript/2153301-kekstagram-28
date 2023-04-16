@@ -74,6 +74,9 @@ const showBigPicture = (objects, link) => {
 
   commentsLoader.addEventListener('click', displayComments);
 
+  let escapeKeydownHandler = () => {};
+  const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
+
   const closeBigPicture = () => {
     bigPictureWrap.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -81,24 +84,17 @@ const showBigPicture = (objects, link) => {
     currentCommentCount = DEFAULT_COUNT_COMMENTS;
     currentMaxValueDispenser = STEP_COUNT_COMMENTS;
     commentsLoader.removeEventListener('click', displayComments);
+    document.removeEventListener('keydown', escapeKeydownHandler);
+    bigPictureCancel.removeEventListener('click', closeBigPicture);
   };
 
-  const escapeKeydownHandler = (evt) => {
+  escapeKeydownHandler = (evt) => {
     if(isEscapeKey(evt)) {
       closeBigPicture();
-      document.removeEventListener('keydown', escapeKeydownHandler);
     }
   };
 
-  const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
-
-  const bigPictureCancelHandler = () => {
-    closeBigPicture();
-    document.removeEventListener('keydown', escapeKeydownHandler);
-    bigPictureCancel.removeEventListener('click', displayComments);
-  };
-
-  bigPictureCancel.addEventListener('click', bigPictureCancelHandler);
+  bigPictureCancel.addEventListener('click', closeBigPicture);
 
   body.classList.add('modal-open');
 
