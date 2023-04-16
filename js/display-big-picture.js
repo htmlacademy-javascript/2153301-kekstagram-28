@@ -92,11 +92,13 @@ const showBigPicture = (objects, link) => {
 
   const bigPictureCancel = bigPictureWrap.querySelector('.big-picture__cancel');
 
-  bigPictureCancel.addEventListener('click', () => {
+  const bigPictureCancelHandler = () => {
     closeBigPicture();
     document.removeEventListener('keydown', escapeKeydownHandler);
-    
-  });
+    bigPictureCancel.removeEventListener('click', displayComments);
+  };
+
+  bigPictureCancel.addEventListener('click', bigPictureCancelHandler);
 
   body.classList.add('modal-open');
 
