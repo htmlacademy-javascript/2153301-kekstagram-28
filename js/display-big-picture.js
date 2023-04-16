@@ -94,14 +94,7 @@ const showBigPicture = (objects, link) => {
     }
   };
 
-  // const bigPictureCancelHandler = () => {
-  //   closeBigPicture();
-  //   document.removeEventListener('keydown', escapeKeydownHandler);
-  //   bigPictureCancel.removeEventListener('click', bigPictureCancelHandler);
-  // };
-
   bigPictureCancel.addEventListener('click', closeBigPicture);
-  // bigPictureCancel.addEventListener('click', bigPictureCancelHandler);
 
   body.classList.add('modal-open');
 
