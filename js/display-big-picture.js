@@ -9,8 +9,11 @@ const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
 
 const commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
+const DEFAULT_COUNT_COMMENTS = 0;
+const STEP_COUNT_COMMENTS = 5;
 let currentCommentCount = 0;
 let currentMaxValueDispenser = 5;
+let displayedNumberOfComments = 0;
 
 const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
@@ -55,11 +58,16 @@ const showBigPicture = (objects, link) => {
       commentsLoader.classList.add('hidden');
       commentDispenser.textContent = numberOfComments;
     } else {
-      commentDispenser.textContent = String(currentCommentCount + 5);
+      commentDispenser.textContent = String(currentCommentCount + STEP_COUNT_COMMENTS);
       currentCommentCount = Number(commentDispenser.textContent);
       commentsLoader.classList.remove('hidden');
     }
-    currentMaxValueDispenser += 5;
+    displayedNumberOfComments = Number(commentDispenser.textContent);
+    currentMaxValueDispenser += STEP_COUNT_COMMENTS;
+
+    for (let i = 0; i < displayedNumberOfComments; i++) {
+      allComments[i].classList.remove('hidden');
+    }
   };
 
   displayComments();
@@ -70,8 +78,8 @@ const showBigPicture = (objects, link) => {
     bigPictureWrap.classList.add('hidden');
     body.classList.remove('modal-open');
     commentDispenser.textContent = '';
-    currentCommentCount = 0;
-    currentMaxValueDispenser = 5;
+    currentCommentCount = DEFAULT_COUNT_COMMENTS;
+    currentMaxValueDispenser = STEP_COUNT_COMMENTS;
     commentsLoader.removeEventListener('click', displayComments);
   };
 
@@ -86,6 +94,8 @@ const showBigPicture = (objects, link) => {
 
   bigPictureCancel.addEventListener('click', () => {
     closeBigPicture();
+    document.removeEventListener('keydown', escapeKeydownHandler);
+    
   });
 
   body.classList.add('modal-open');

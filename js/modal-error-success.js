@@ -7,30 +7,7 @@ const showSuccessMessage = () => {
   const cloneSuccessSend = templateSuccess.cloneNode(true);
   const successButton = cloneSuccessSend.querySelector('.success__button');
 
-  successButton.addEventListener('click', () => {
-    cloneSuccessSend.remove();
-  });
-
-  cloneSuccessSend.addEventListener('click', (evt) => {
-    if (evt.target.getAttribute('id') === 'success-block') {
-      cloneSuccessSend.remove();
-    }
-  });
-
   document.body.append(cloneSuccessSend);
-
-  // const escapeKeydownHandler = (evt) => {
-  //   if (isEscapeKey(evt)) {
-  //     cloneSuccessSend.remove();
-  //     closeSuccessMessage();
-  //   }
-  // };
-  //
-  // const closeSuccessMessage = () => {
-  //   document.removeEventListener('keydown', escapeKeydownHandler);
-  // };
-  //
-  // document.addEventListener('keydown', escapeKeydownHandler);
 
   const escapeKeydownHandler = (evt) => {
     if(isEscapeKey(evt)) {
@@ -39,8 +16,19 @@ const showSuccessMessage = () => {
     }
   };
 
-  document.addEventListener('keydown', escapeKeydownHandler);
+  successButton.addEventListener('click', () => {
+    cloneSuccessSend.remove();
+    document.removeEventListener('keydown', escapeKeydownHandler);
+  });
 
+  cloneSuccessSend.addEventListener('click', (evt) => {
+    if (evt.target.getAttribute('id') === 'success-block') {
+      cloneSuccessSend.remove();
+      document.removeEventListener('keydown', escapeKeydownHandler);
+    }
+  });
+
+  document.addEventListener('keydown', escapeKeydownHandler);
 };
 
 const showErrorMessage = () => {
