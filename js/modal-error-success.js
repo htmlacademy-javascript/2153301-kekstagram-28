@@ -7,23 +7,28 @@ const showSuccessMessage = () => {
   const cloneSuccessSend = templateSuccess.cloneNode(true);
   const successButton = cloneSuccessSend.querySelector('.success__button');
 
+  document.body.append(cloneSuccessSend);
+
+  const escapeKeydownHandler = (evt) => {
+    if(isEscapeKey(evt)) {
+      cloneSuccessSend.remove();
+      document.removeEventListener('keydown', escapeKeydownHandler);
+    }
+  };
+
   successButton.addEventListener('click', () => {
     cloneSuccessSend.remove();
+    document.removeEventListener('keydown', escapeKeydownHandler);
   });
 
   cloneSuccessSend.addEventListener('click', (evt) => {
     if (evt.target.getAttribute('id') === 'success-block') {
       cloneSuccessSend.remove();
+      document.removeEventListener('keydown', escapeKeydownHandler);
     }
   });
 
-  document.body.append(cloneSuccessSend);
-
-  document.addEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt)) {
-      cloneSuccessSend.remove();
-    }
-  });
+  document.addEventListener('keydown', escapeKeydownHandler);
 };
 
 const showErrorMessage = () => {

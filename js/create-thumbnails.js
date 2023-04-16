@@ -1,3 +1,6 @@
+import {addHandlers} from './display-big-picture.js';
+
+
 const PICTURES_COUNT = 10;
 
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
@@ -31,14 +34,14 @@ const sortByComments = (photoA, photoB) =>
 
 const sortRandomly = () => Math.random() - 0.5;
 
-const getFilteredPictures = (choice) => {
+const getFilteredPictures = (pictures) => {
   switch (currentFilter) {
     case imgFilterRandomUnique:
-      return choice.slice().sort(sortRandomly).slice(0, PICTURES_COUNT);
+      return pictures.slice().sort(sortRandomly).slice(0, PICTURES_COUNT);
     case imgFilterDiscussed:
-      return choice.slice().sort(sortByComments);
+      return pictures.slice().sort(sortByComments);
     default :
-      return choice.slice();
+      return pictures.slice();
   }
 };
 
@@ -68,6 +71,7 @@ const renderThumbnails = (pictures) => {
 
   container.append(fragment);
   filterElement.classList.remove('img-filters--inactive');
+  addHandlers(pictures);
 };
 
 export { renderThumbnails, changeActualSorting};
