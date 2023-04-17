@@ -8,6 +8,8 @@ const showSuccessMessage = () => {
   const cloneSuccessSend = templateSuccess.cloneNode(true);
   const successButton = cloneSuccessSend.querySelector('.success__button');
 
+  document.removeEventListener('keydown', escapeKeydownUserFormHandler);
+
   document.body.append(cloneSuccessSend);
 
   const escapeKeydownHandler = (evt) => {
