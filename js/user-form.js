@@ -28,6 +28,8 @@ const removeListenerFieldHandler = (evt) => {
   }
 };
 
+let escapeKeydownUserFormHandler = () => {};
+
 const closePhotoEditingHandler = () => {
   imgOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -38,9 +40,10 @@ const closePhotoEditingHandler = () => {
   uploadCancel.removeEventListener('click', closePhotoEditingHandler);
   commentField.removeEventListener('keydown', removeListenerFieldHandler);
   hashtagsField.removeEventListener('keydown', removeListenerFieldHandler);
+  document.removeEventListener('keydown', escapeKeydownUserFormHandler);
 };
 
-const escapeKeydownUserFormHandler = (evt) => {
+escapeKeydownUserFormHandler = (evt) => {
   if(isEscapeKey(evt)) {
     closePhotoEditingHandler();
     document.removeEventListener('keydown', escapeKeydownUserFormHandler);
