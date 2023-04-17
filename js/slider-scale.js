@@ -3,11 +3,9 @@ const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const DEFAULT_SCALE = 100;
 
-
 const buttonSmaller = document.querySelector('.scale__control--smaller');
 const buttonBigger = document.querySelector('.scale__control--bigger');
 const inputScaleValue = document.querySelector('.scale__control--value');
-// предпросмотр изображения
 const imgPreview = document.querySelector('.img-upload__preview img');
 
 const scaleImage = (value) => {
@@ -15,7 +13,6 @@ const scaleImage = (value) => {
   inputScaleValue.value = `${value}%`;
 };
 
-// обработчик кнопки уменьшения фотографии
 const onSmallerButtonClick = () => {
   const currentValue = parseInt(inputScaleValue.value, 10);
   let newValue = currentValue - SCALE_STEP;
@@ -25,7 +22,6 @@ const onSmallerButtonClick = () => {
   scaleImage(newValue);
 };
 
-// обработчик кнопки увеличения фотографии
 const onBiggerButtonClick = () => {
   const currentValue = parseInt(inputScaleValue.value, 10);
   let newValue = currentValue + SCALE_STEP;

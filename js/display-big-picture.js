@@ -1,5 +1,12 @@
 import { isEnterKey, isEscapeKey } from './util.js';
 
+const DEFAULT_COUNT_COMMENTS = 0;
+const STEP_COUNT_COMMENTS = 5;
+
+let currentCommentCount = 0;
+let currentMaxValueDispenser = 5;
+let displayedNumberOfComments = 0;
+
 const bigPictureWrap = document.querySelector('.big-picture');
 const bigPictureImg = bigPictureWrap.querySelector('.big-picture__img img');
 const likesCount = bigPictureWrap.querySelector('.likes-count');
@@ -9,11 +16,6 @@ const commentsLoader = bigPictureWrap.querySelector('.comments-loader');
 const socialCommentCount = bigPictureWrap.querySelector('.social__comment-count');
 
 const commentDispenser = socialCommentCount.querySelector('.comment-dispenser');
-const DEFAULT_COUNT_COMMENTS = 0;
-const STEP_COUNT_COMMENTS = 5;
-let currentCommentCount = 0;
-let currentMaxValueDispenser = 5;
-let displayedNumberOfComments = 0;
 
 const comments = bigPictureWrap.querySelector('.social__comments');
 const comment = comments.querySelector('li').cloneNode(true);
@@ -101,7 +103,6 @@ const showBigPicture = (objects, link) => {
   document.addEventListener('keydown', escapeKeydownHandler);
 };
 
-// функция отслеживающая нажатие ENTER и клик на миниатюре
 export const addHandlers = (objects) => {
   const links = document.querySelectorAll('.picture');
   links.forEach((link) => {
