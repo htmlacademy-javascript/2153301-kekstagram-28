@@ -1,21 +1,17 @@
 import {addHandlers} from './display-big-picture.js';
 
-
 const PICTURES_COUNT = 10;
 
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 
-// контейнер для фотографий
 const container = document.querySelector('.pictures');
 
-// блок сортировки фотографий
 const filterElement = document.querySelector('.img-filters');
 const imgFilterRandomUnique = filterElement.querySelector('#filter-random');
 const imgFilterDiscussed = filterElement.querySelector('#filter-discussed');
 
 let currentFilter = filterElement.querySelector('.img-filters__button--active');
 
-// отслеживание клика и присваивание currentFilter новое значение
 const changeActualSorting = (cb) => {
   filterElement.addEventListener('click', (evt) => {
     if (evt.target.matches('.img-filters__button')) {
@@ -31,7 +27,6 @@ const changeActualSorting = (cb) => {
 const sortByComments = (photoA, photoB) =>
   photoB.comments.length - photoA.comments.length;
 
-
 const sortRandomly = () => Math.random() - 0.5;
 
 const getFilteredPictures = (pictures) => {
@@ -45,7 +40,6 @@ const getFilteredPictures = (pictures) => {
   }
 };
 
-// создание миниатюры
 const createThumbnail = ({ url, likes, comments, description, id }) => {
   const thumbnailClone = templatePicture.cloneNode(true);
 

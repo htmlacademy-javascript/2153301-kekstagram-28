@@ -48,28 +48,28 @@ const EFFECTS = [
     unit: '',
   },
 ];
-// оригинал изображения
+
 const DEFAULT_EFFECT = EFFECTS[0];
-// текущий эффект
+
 let chosenEffect = DEFAULT_EFFECT;
 
-// изображение
+
 const imageElement = document.querySelector('.img-upload__preview img');
-// fieldset фильтров
+
 const effectsElement = document.querySelector('.effects');
 
 const sliderElement = document.querySelector('.effect-level__slider');
-// контейнер изображения
+
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
-// поле записи уровня эффекта
+
 const effectLevelElement = document.querySelector('#effect-level-value');
 
 const isDefault = () => chosenEffect === DEFAULT_EFFECT;
-// показ слайдера
+
 const showSlider = () => {
   sliderContainerElement.classList.remove('hidden');
 };
-// исчезновение слайдера
+
 const hideSlider = () => {
   sliderContainerElement.classList.add('hidden');
 };

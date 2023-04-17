@@ -1,7 +1,5 @@
-// валидируемая форма
 const uploadForm = document.querySelector('.img-upload__form');
 
-// поля комментариев и хештегов
 const commentField = uploadForm.querySelector('#text-description');
 const hashtagsField = uploadForm.querySelector('#text-hashtags');
 
@@ -14,18 +12,15 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'form__error'
 });
 
-// валидация поля комментариев
 function validateComment (value) {
   return value.length <= 140;
 }
 
-// проверка на повторения хештегов
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-// валидация поля хештегов
 const validateHashtags = (value) => {
   const valueFreeSpace = value.trimEnd();
   if(valueFreeSpace.length === 0) {

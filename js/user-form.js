@@ -6,17 +6,12 @@ import { sendData} from './api.js';
 import {showErrorMessage, showSuccessMessage} from './modal-error-success.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-// input загрузки изображения пользователя
 const inputUploadFile = document.querySelector('#upload-file');
-// модальное окно редактирования фотографии
 const imgOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
-// кнопка закрытия окна редактирования фотографии
 const uploadCancel = document.querySelector('#upload-cancel');
-// предпросмотр фотографии
 const preview = document.querySelector('.img-upload__preview img');
 
-// поля комментариев и хештегов
 const commentField = document.querySelector('#text-description');
 const hashtagsField = document.querySelector('#text-hashtags');
 const uploadForm = document.querySelector('#upload-select-image');
